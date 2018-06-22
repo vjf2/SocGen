@@ -14,7 +14,7 @@ dat2mat<-function(x){
   co<-sort(unique(x[,2]))
   nco<-length(co)
   mat<-matrix(nrow=nro, ncol=nco)
-  dimnames(mat)<-list(ro, co)
+  dimnames(mat)<-list(as.character(ro), as.character(co))
   apply(x, 1, function(w) {mat[as.character(w[1]),
                                as.character(w[2])]<<-w[[3]]})
   return(mat)
