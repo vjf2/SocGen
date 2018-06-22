@@ -34,7 +34,7 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
   
   ds<-tcrossprod(days_seen) #seen on same day
   
-  nmatpre<-as.numeric(table(td$dolphin_id)) #number of times each individual sighted
+  nmatpre<-as.numeric(table(sightings[,IDs])) #number of times each individual sighted
   
   nmat<-outer(nmatpre, nmatpre, FUN="+")
   
