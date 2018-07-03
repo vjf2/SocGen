@@ -4,10 +4,12 @@
 \alias{mhead}
 \title{A Matrix Preview Function}
 \usage{
-mhead(x)
+mhead(x, n = 10)
 }
 \arguments{
 \item{x}{a matrix or dataframe}
+
+\item{n}{number of row or columns to display (default 10)}
 }
 \description{
 This function allows you to view a preview of wide matrices and dataframes.
