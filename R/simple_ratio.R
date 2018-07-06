@@ -7,13 +7,14 @@
 #' @param IDs individual IDs
 #' @param diag logical, should the diagonal be included (default FALSE)
 #' @param symmetric logical, should a symmetric matrix be returned (default TRUE)
+#' @param masked an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not 
 #' @keywords simple ratio association index
 #' @export
 #' @examples
 #' dat2mat()
 
 
-simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates=dates, IDs=IDs, diag=FALSE, symmetric=TRUE){
+simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates=dates, IDs=IDs, diag=FALSE, symmetric=TRUE, mask=NULL){
   
   #calcualate days where both individuals were seen
   
@@ -38,7 +39,28 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
   
   nmat<-outer(nmatpre, nmatpre, FUN="+")
   
-  res<-gs/(nmat - gs - (ds - gs))
+  if(is.null(mask)){
+    res<-gs/(nmat - gs - (ds - gs))
+    }
+  
+  else{
+    obsXavail<-mask * days_seen
+    obsXavail[is.na(obsXavail)] <- -1
+    inds<-rownames(obsXavail)
+    cmb<-t(combn(rownames(obsXavail), 2))
+    cmb<-rbind(cmb, cbind(inds, inds))
+    input<-t(obsXavail)
+    
+    res1<-apply(cmb, 1, function(x) {
+      xy<-input[,x[1]] * input[,x[2]]
+      z<-sum(xy==-1)  
+      return(z)
+      }) 
+    
+    rmmat<-data.frame(cmb, res1)
+    rmmat<-dat2mat(rmmat, forceSymmetric = TRUE)
+    res<-gs/((nmat-rmmat) - gs - (ds - gs))
+    }
   
   if(!diag) {diag(res)<-NA}
   if(!symmetric) {res[lower.tri(res)]<-NA}

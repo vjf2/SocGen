@@ -5,7 +5,8 @@
 \title{Simple Ratio Index}
 \usage{
 simple_ratio(sightings = sightings, group_variable = group_variable,
-  dates = dates, IDs = IDs, diag = FALSE, symmetric = TRUE)
+  dates = dates, IDs = IDs, diag = FALSE, symmetric = TRUE,
+  mask = NULL)
 }
 \arguments{
 \item{sightings}{a dataframe in linear format, i.e., one row per individual per observation}
@@ -19,6 +20,8 @@ simple_ratio(sightings = sightings, group_variable = group_variable,
 \item{diag}{logical, should the diagonal be included (default FALSE)}
 
 \item{symmetric}{logical, should a symmetric matrix be returned (default TRUE)}
+
+\item{masked}{an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not}
 }
 \description{
 This function calculates the simple ratio index for data in linear format

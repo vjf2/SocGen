@@ -4,13 +4,18 @@
 \alias{dat2mat}
 \title{Convert a dataframe in a long format to a wide matrix}
 \usage{
-dat2mat(x)
+dat2mat(data = data, forceSymmetric = FALSE)
 }
 \arguments{
+\item{forceSymmetric}{boolean, if matrix has a empty triangle, fill over the diagonal}
+
 \item{x}{a matrix}
 }
 \description{
 This function converts 3-column dataframe such as produced with mat2dat back into a matrix with the IDs in the first two columns used as dimnames
+}
+\details{
+If value column is type numeric or integer the function will return a numeric matrix, otherwise a character matrix will be returned.
 }
 \examples{
 mat2dat()
