@@ -44,6 +44,7 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
     }
   
   else{
+    mask<-mask[rownames(days_seen), colnames(days_seen)]
     obsXavail<-mask * days_seen
     obsXavail[is.na(obsXavail)] <- -1
     inds<-rownames(obsXavail)
