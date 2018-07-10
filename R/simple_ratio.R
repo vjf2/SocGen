@@ -14,7 +14,7 @@
 #' dat2mat()
 
 
-simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates=dates, IDs=IDs, diag=FALSE, symmetric=TRUE, mask=NULL){
+simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates=dates, IDs=IDs, diag=FALSE, symmetric=TRUE, mask=NULL, assocInd="SRI"){
   
   #calcualate days where both individuals were seen
   
@@ -66,6 +66,7 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
   if(!diag) {diag(res)<-NA}
   if(!symmetric) {res[lower.tri(res)]<-NA}
   
-  return(res)
+  if(assocInd=="SRI"){return(res)}
+  else if(assocInd=="X") {return(gs)}
   
 }
