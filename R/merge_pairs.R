@@ -41,6 +41,8 @@ merge_pairs<-function(x, y, xID1, xID2, yID1=xID1, yID2=xID2, all.x=TRUE, all.y=
   y$pair<-paste0(y[,yID1], y[,yID2])
 
   y$index<-plookup$index[match(y$pair, plookup$pair)]
+  
+  y<-y[,!(names(y) %in% c(yID1, yID2))]
 
   ogx$pair<-paste0(ogx[,xID1], ogx[,xID2])
 
@@ -48,7 +50,7 @@ merge_pairs<-function(x, y, xID1, xID2, yID1=xID1, yID2=xID2, all.x=TRUE, all.y=
 
   z<-merge(ogx,y,by="index", all.x=all.x, all.y=all.y)
 
-  funccol<-c("start_pair", "reverse_pair", "index", "pair", "pair.x", "pair.y",yID1, yID2)
+  funccol<-c("start_pair", "reverse_pair", "index", "pair", "pair.x", "pair.y")
 
   z<-z[,setdiff(names(z), funccol)]
 
