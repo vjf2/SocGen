@@ -11,9 +11,8 @@
 
 
 mat2dat<-function (x, value.name="values", retainMissing=FALSE) {
-  rnames <- rownames(x)
-  cnames <- colnames(x)
-  nmat<-expand.grid(rnames, cnames, stringsAsFactors = FALSE)
+
+  nmat<-expand.grid(dimnames(x), stringsAsFactors = FALSE)
   nmat$values<-c(x)
   
   if(!retainMissing){
