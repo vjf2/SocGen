@@ -4,10 +4,14 @@
 \alias{mat2dat}
 \title{Convert a matrix to a dataframe with ID names}
 \usage{
-mat2dat(x)
+mat2dat(x, value.name = "values", retainMissing = FALSE)
 }
 \arguments{
 \item{x}{a matrix}
+
+\item{value.name}{a character string, name of values column}
+
+\item{retainMissing}{logical, if TRUE retain empty cells as records in dataframe}
 }
 \description{
 This function converts a matrix to a 3-column dataframe with dimnames and values
