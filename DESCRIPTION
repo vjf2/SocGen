@@ -1,9 +1,11 @@
 Package: SocGen
 Title: Analysis of Genetic and Social Behavior Data
+Date: 2018-07-12
 Version: 0.0.0.9000
 Authors@R: person("Vivienne", "Foroughirad", email = "vivienne.foroughirad@duke.edu", role = c("aut", "cre"))
 Description: Writing my dissertation.
 Depends: R (>= 3.4.3)
+Suggests: kinship2
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
