@@ -4,10 +4,12 @@
 \alias{dat2mat}
 \title{Convert a dataframe in a long format to a wide matrix}
 \usage{
-dat2mat(data = data, forceSymmetric = FALSE)
+dat2mat(data = data, forceSymmetric = FALSE, diag = FALSE)
 }
 \arguments{
 \item{forceSymmetric}{boolean, if matrix has a empty triangle, fill over the diagonal}
+
+\item{diag}{boolean, should a diagonal be added if absent?}
 
 \item{x}{a matrix}
 }
