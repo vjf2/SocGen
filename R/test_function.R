@@ -17,11 +17,12 @@ test_function<-function(){
   
   else if(!require(SNPRelate, quietly=TRUE)){
   source("https://bioconductor.org/biocLite.R")
-  tryCatch(biocLite("SNPRelate"), error=function(e) message("Please install the SNPRelate package"))
+  tryCatch(biocLite("SNPRelate",
+                   suppressUpdates=TRUE, quiet=TRUE), error=function(e) message("Please install the SNPRelate package"))
     
   }
   
-  else if(!require(igraph, quietly = TRUE)){
+  else if(!require(igraph, quietly = TRUE, warn.conflicts=FALSE)){
   
     tryCatch(install.packages("igraph", dependencies = TRUE), error=function(e) message("Please install the igraph package"))
       
