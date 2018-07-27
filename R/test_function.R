@@ -17,7 +17,7 @@ test_function<-function(){
   
   else if(!require(SNPRelate, quietly=TRUE)){
   source("https://bioconductor.org/biocLite.R")
-  tryCatch(biocLite("SNPRelate",
+  tryCatch(biocLite(c("gdsfmt", "SNPRelate"),
                    suppressUpdates=TRUE, suppressAutoUpdate=TRUE, ask=FALSE, 
                    quiet=TRUE), error=function(e) message("Please install the SNPRelate package"))
     
