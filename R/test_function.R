@@ -30,12 +30,12 @@ test_function<-function(){
     
   #check working directory
   
-  else if(!"dna_ascii.txt" %in% list.files()){
-    message(paste("You do not have the file \"dna_ascii.txt\" in your working directory. Your current working directory is", getwd())) 
+  else if(!"test_file.txt" %in% list.files()){
+    message(paste("You do not have the file \"test_file.txt\" in your working directory. Your current working directory is", getwd())) 
   }
     
   else{
-    art<-readLines("dna_ascii.txt")
+    art<-readLines("test_file.txt")
     cat(art, sep = "\n")
   }
   
