@@ -19,7 +19,7 @@ test_function<-function(){
   source("https://bioconductor.org/biocLite.R")
   suppressWarnings(biocLite(c("gdsfmt", "SNPRelate"),
                    suppressUpdates=TRUE, suppressAutoUpdate=TRUE, ask=FALSE, 
-                   quiet=TRUE)
+                   quiet=TRUE))
     
   }
   
