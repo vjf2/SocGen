@@ -17,15 +17,15 @@ test_function<-function(){
   
   else if(!require(SNPRelate, quietly=TRUE)){
   source("https://bioconductor.org/biocLite.R")
-  tryCatch(biocLite(c("gdsfmt", "SNPRelate"),
+  biocLite(c("gdsfmt", "SNPRelate"),
                    suppressUpdates=TRUE, suppressAutoUpdate=TRUE, ask=FALSE, 
-                   quiet=TRUE), error=function(e) message("Please install the SNPRelate package"))
+                   quiet=TRUE)
     
   }
   
   else if(!require(igraph, quietly = TRUE, warn.conflicts=FALSE)){
   
-    tryCatch(install.packages("igraph", dependencies = TRUE), error=function(e) message("Please install the igraph package"))
+    install.packages("igraph", dependencies = TRUE)
       
   }
     
