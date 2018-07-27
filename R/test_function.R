@@ -1,7 +1,7 @@
 #' Test Function
 #'
 #' This function prepares students for the exercise "Using genome-wide SNP data to investigate social structure in pilot whales"
-
+#' @export
 
 
 test_function<-function(){
