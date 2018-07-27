@@ -30,7 +30,7 @@ dat2mat<-function(data = data, forceSymmetric = FALSE, diag = FALSE){
     }
   
   apply(data, 1, function(w) {mat[as.character(w[1]),
-                               as.character(w[2])]<<-w[3]})
+                               as.character(w[2])]<<-w[[3]]})
   if(forceSymmetric)
   {
     #check that one triangle is empty
