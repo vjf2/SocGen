@@ -17,7 +17,7 @@ test_function<-function(){
   
   else if(!require(SNPRelate, quietly=TRUE)){
   source("https://bioconductor.org/biocLite.R")
-  biocLite(c("gdsfmt", "SNPRelate"),
+  suppressWarnings(biocLite(c("gdsfmt", "SNPRelate"),
                    suppressUpdates=TRUE, suppressAutoUpdate=TRUE, ask=FALSE, 
                    quiet=TRUE)
     
@@ -25,7 +25,7 @@ test_function<-function(){
   
   else if(!require(igraph, quietly = TRUE, warn.conflicts=FALSE)){
   
-    install.packages("igraph", dependencies = TRUE)
+    suppressWarnings(install.packages("igraph", dependencies = TRUE, quiet=TRUE))
       
   }
     
