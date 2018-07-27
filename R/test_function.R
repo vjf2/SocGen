@@ -11,14 +11,15 @@ test_function<-function(){
   if(rv!="35") {
     print(paste0("You are using ", 
                 version$version.string,
-                ". You may need to update to the latest version available at www.r-project.org."))
+                ". You should update to the latest version available at www.r-project.org."))
     
   }
   
   else if(!require(SNPRelate, quietly=TRUE)){
   source("https://bioconductor.org/biocLite.R")
   tryCatch(biocLite("SNPRelate",
-                   suppressUpdates=TRUE, quiet=TRUE), error=function(e) message("Please install the SNPRelate package"))
+                   suppressUpdates=TRUE, suppressAutoUpdate=TRUE, ask=FALSE, 
+                   quiet=TRUE), error=function(e) message("Please install the SNPRelate package"))
     
   }
   
