@@ -15,13 +15,13 @@ test_function<-function(){
     
   }
   
-  else if(!require(SNPRelate)){
+  else if(!require(SNPRelate, quietly=TRUE)){
   source("https://bioconductor.org/biocLite.R")
   tryCatch(biocLite("SNPRelate"), error=function(e) message("Please install the SNPRelate package"))
     
   }
   
-  else if(!require(igraph)){
+  else if(!require(igraph, quietly = TRUE)){
   
     tryCatch(install.packages("igraph", dependencies = TRUE), error=function(e) message("Please install the igraph package"))
       
