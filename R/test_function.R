@@ -25,7 +25,7 @@ test_function<-function(){
   
   if(!suppressWarnings(require(igraph, quietly = TRUE, warn.conflicts=FALSE))){
   
-    install.packages("igraph", dependencies = TRUE, quiet=TRUE, verbose=FALSE)
+    install.packages("igraph", quiet=TRUE, verbose=FALSE)
       
   }
     
