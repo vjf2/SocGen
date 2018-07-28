@@ -11,7 +11,7 @@ test_function<-function(){
   if(rv!="35") {
     print(paste0("You are using ", 
                 version$version.string,
-                ". You should update to the latest version available at www.r-project.org."))
+                ". You should update to the latest version (3.5.1) available at www.r-project.org."))
     
   }
   
@@ -23,7 +23,7 @@ test_function<-function(){
     
   }
   
-  else if(!suppressWarnings(require(igraph, quietly = TRUE, warn.conflicts=FALSE))){
+  if(!suppressWarnings(require(igraph, quietly = TRUE, warn.conflicts=FALSE))){
   
     install.packages("igraph", dependencies = TRUE, quiet=TRUE, verbose=FALSE)
       
@@ -31,7 +31,7 @@ test_function<-function(){
     
   #check working directory
   
-  else if(!"test_file.txt" %in% list.files()){
+  if(!"test_file.txt" %in% list.files()){
     message(paste("You do not have the file \"test_file.txt\" in your working directory. Your current working directory is", getwd())) 
   }
     
