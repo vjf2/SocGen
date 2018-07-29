@@ -7,11 +7,11 @@
 dat2mat(data = data, forceSymmetric = FALSE, diag = FALSE)
 }
 \arguments{
+\item{data}{a matrix}
+
 \item{forceSymmetric}{boolean, if matrix has a empty triangle, fill over the diagonal}
 
 \item{diag}{boolean, should a diagonal be added if absent?}
-
-\item{x}{a matrix}
 }
 \description{
 This function converts 3-column dataframe such as produced with mat2dat back into a matrix with the IDs in the first two columns used as dimnames

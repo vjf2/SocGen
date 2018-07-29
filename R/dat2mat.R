@@ -1,7 +1,7 @@
 #' Convert a dataframe in a long format to a wide matrix
 #'
 #' This function converts 3-column dataframe such as produced with mat2dat back into a matrix with the IDs in the first two columns used as dimnames
-#' @param x a matrix
+#' @param data a matrix
 #' @param forceSymmetric boolean, if matrix has a empty triangle, fill over the diagonal
 #' @param diag boolean, should a diagonal be added if absent?
 #' @details If value column is type numeric or integer the function will return a numeric matrix, otherwise a character matrix will be returned. 
@@ -9,8 +9,6 @@
 #' @export
 #' @examples
 #' mat2dat()
-
-#add diag option
 
 
 dat2mat<-function(data = data, forceSymmetric = FALSE, diag = FALSE){
