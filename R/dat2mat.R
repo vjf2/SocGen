@@ -12,6 +12,10 @@
 
 
 dat2mat<-function(data = data, forceSymmetric = FALSE, diag = FALSE){
+  
+  data<-as.matrix(data)
+  data<-apply(data, 2, trimws)
+  
   ro<-sort(unique(data[,1]))
   nro<-length(ro)
   co<-sort(unique(data[,2]))
