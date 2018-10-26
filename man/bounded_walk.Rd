@@ -14,7 +14,7 @@ bounded_walk(n.times = 100, maxDist = 10, start = c(0, 0))
 \item{start}{x and y starting position (default (0,0))}
 }
 \description{
-This function creates a random walk bounded by a maximum distance from the starting position.
+This function creates a random or semi-random walk bounded by a maximum distance from the starting position.
 }
 \examples{
 bounded_walk()
