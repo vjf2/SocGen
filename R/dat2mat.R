@@ -13,6 +13,8 @@
 
 dat2mat<-function(data = data, forceSymmetric = FALSE, diag = FALSE){
   
+  typ<-class(data[,3])
+  
   data<-as.matrix(data)
   data<-apply(data, 2, trimws)
   
@@ -46,12 +48,12 @@ dat2mat<-function(data = data, forceSymmetric = FALSE, diag = FALSE){
       
   }
   
-  if(class(data[,3]) %in% c("integer", "numeric")) {
+  if(typ %in% c("integer", "numeric")) {
     mode(mat)<-"numeric"
   }
   
   #fix logicals
-  if(class(data[,3])=="logical") 
+  if(typ=="logical") 
   {
     mat<-trimws(mat)
     mode(mat)<-"logical"
