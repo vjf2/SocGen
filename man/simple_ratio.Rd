@@ -21,7 +21,9 @@ simple_ratio(sightings = sightings, group_variable = group_variable,
 
 \item{symmetric}{logical, should a symmetric matrix be returned (default TRUE)}
 
-\item{masked}{an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not}
+\item{mask}{an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not}
+
+\item{assocInd}{whether the association index "SRI", the number of sightings together "X", or total "XY" should be returned}
 }
 \description{
 This function calculates the simple ratio index for data in linear format

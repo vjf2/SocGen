@@ -7,7 +7,8 @@
 #' @param IDs individual IDs
 #' @param diag logical, should the diagonal be included (default FALSE)
 #' @param symmetric logical, should a symmetric matrix be returned (default TRUE)
-#' @param masked an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not 
+#' @param mask an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not 
+#' @param assocInd whether the association index "SRI", the number of sightings together "X", or total "XY" should be returned
 #' @keywords simple ratio association index
 #' @export
 #' @examples
@@ -33,40 +34,45 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
   
   gs<-tcrossprod(groups_seen) #seen in same group
   
+  if(assocInd=="X") {retVal <- gs
+  } else{
+  
   ds<-tcrossprod(days_seen) #seen on same day
   
   nmatpre<-as.numeric(table(sightings[,IDs])) #number of times each individual sighted
   
   nmat<-outer(nmatpre, nmatpre, FUN="+")
   
-  if(is.null(mask)){
-    res<-gs/(nmat - gs - (ds - gs))
-    }
-  
-  else{
-    mask<-mask[rownames(days_seen), colnames(days_seen)]
-    obsXavail<-mask * days_seen
-    obsXavail[is.na(obsXavail)] <- -1
-    inds<-rownames(obsXavail)
-    cmb<-t(combn(rownames(obsXavail), 2))
-    cmb<-rbind(cmb, cbind(inds, inds))
-    input<-t(obsXavail)
-    
-    res1<-apply(cmb, 1, function(x) {
-      xy<-input[,x[1]] * input[,x[2]]
-      z<-sum(xy==-1)  
-      return(z)
-      }) 
-    
+  if(assocInd=="SRI" & is.null(mask)){
+    retVal<-gs/(nmat - gs - (ds - gs))
+    }else if(assocInd=="XY" & is.null(mask)) {retVal <- (nmat - gs - (ds - gs))
+    }else if(is.matrix(mask)){
+      mask<-mask[rownames(days_seen), colnames(days_seen)]
+      obsXavail<-mask * days_seen
+      obsXavail[is.na(obsXavail)] <- -1
+      inds<-rownames(obsXavail)
+      cmb<-t(combn(rownames(obsXavail), 2))
+      cmb<-rbind(cmb, cbind(inds, inds))
+      input<-t(obsXavail)
+      
+      res1<-apply(cmb, 1, function(x) {
+        xy<-input[,x[1]] * input[,x[2]]
+        z<-sum(xy==-1)  
+        return(z)
+        }) 
+      
     rmmat<-data.frame(cmb, res1)
     rmmat<-dat2mat(rmmat, forceSymmetric = TRUE)
-    res<-gs/((nmat-rmmat) - gs - (ds - gs))
-    }
+    if(assocInd=="SRI" & is.matrix(mask)){retVal<-gs/((nmat-rmmat) - gs - (ds - gs))
+    }else if(assocInd=="XY" & is.matrix(mask)){retVal<-((nmat-rmmat) - gs - (ds - gs))}
+  }
   
-  if(!diag) {diag(res)<-NA}
-  if(!symmetric) {res[lower.tri(res)]<-NA}
+} #end everything after just X
   
-  if(assocInd=="SRI"){return(res)}
-  else if(assocInd=="X") {return(gs)}
+
+  if(!diag) {diag(retVal)<-NA}
+  if(!symmetric) {retVal[lower.tri(retVal)]<-NA}
+  
+  return(retVal)
   
 }
