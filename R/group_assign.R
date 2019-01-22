@@ -7,7 +7,7 @@
 #' @param ycoords y coordinates
 #' @param time time step variable
 #' @param group_size average group size in results
-#' @param method grouping method, currently only hierarchical clustering implemented
+#' @param method grouping method, either kmeans or hierarchical clustering
 #' @keywords group ids, cluster ids
 #' @export
 #' @examples
@@ -18,25 +18,40 @@ group_assign <- function(data = data,
                          xcoord = "x",
                          ycoord = "y",
                          time = "day",
-                         group_size = 2,
-                         method = "hclust") {
-    lapply(data, function(w) {
-      each_days_assoc <- lapply(w, function(x1) {
-        num_clust <- ceiling(nrow(x1) / group_size)
+                         group_size = NULL,
+                         method = c("hclust", "kmeans")) {
+  lapply(data, function(w) {
+    
+    each_days_assoc <- lapply(w, function(x1) {
+      
+      if(!is.null(group_size)){
         
-        if(num_clust>1){
+        num_clust <- ceiling(nrow(x1) / group_size)}
+      
+      else{num_clust <- x1$groupseen[1]}
+      
+      if (num_clust > 1 & method=="hclust") {
         xc <- hclust(dist(x1[, c(xcoord, ycoord)]))
-        groups <- cutree(xc, k = num_clust)}
-        
-        else{groups <- 1}
-        
-        daygroup <- cbind(x1, groups)
-        rownames(daygroup) <- NULL
-        return(daygroup)
-      })
-      eda <- do.call("rbind", each_days_assoc)
-      eda$observation_id <- paste0(eda[,time], "_", eda$group)
-      rownames(eda) <- NULL
-      return(eda)
+        groups <- cutree(xc, k = num_clust)
+      }
+      
+      if (num_clust > 1 & method=="kmeans") {
+        xk <- kmeans(dist(x1[, c(xcoord, ycoord)]), num_clust, algorithm="MacQueen")
+        groups <- as.numeric(xk$cluster)
+      }
+      if (num_clust == 1) {
+        groups <- 1
+      }
+      
+      daygroup <- cbind(x1, groups)
+      rownames(daygroup) <- NULL
+      return(daygroup)
     })
-  }
+    
+    eda <- do.call("rbind", each_days_assoc)
+    eda$observation_id <- paste0(eda[, time], "_", eda$groups)
+    rownames(eda) <- NULL
+    return(eda)
+  })
+}
+
