@@ -23,8 +23,13 @@ group_assign <- function(data = data,
     lapply(data, function(w) {
       each_days_assoc <- lapply(w, function(x1) {
         num_clust <- ceiling(nrow(x1) / group_size)
+        
+        if(num_clust>1){
         xc <- hclust(dist(x1[, c(xcoord, ycoord)]))
-        groups <- cutree(xc, k = num_clust)
+        groups <- cutree(xc, k = num_clust)}
+        
+        else{groups <- 1}
+        
         daygroup <- cbind(x1, groups)
         rownames(daygroup) <- NULL
         return(daygroup)
