@@ -26,9 +26,14 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
   
   #calculate number of groups each pair was seen in together
   
-  jg<-data.frame(sightings[,c(IDs, group_variable)], 1)
+  jg<-data.frame(sightings[,c(IDs, dates, group_variable)], 1)
   jg[,group_variable]<-paste0("g", jg[,group_variable])
-  groups_seen<-dat2mat(jg)
+  
+  if(is.matrix(mask)){
+    jg$filter<-apply(jg, 1, function(w) {ego_mask[as.character(w[1]),as.character(w[2])]})
+    jg$X1<-ifelse(is.na(jg$filter),0,1) }
+  
+  groups_seen<-dat2mat(jg[,c(IDs, group_variable, "X1")])
   mode(groups_seen)<-"numeric"
   groups_seen[is.na(groups_seen)]<-0
   
