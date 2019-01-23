@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' fast_random_points()
-#' simple_ratio
+#' simple_ratio()
 
 schedulize <- function(data,
                        id = "dolphin_id",
