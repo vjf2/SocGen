@@ -30,7 +30,7 @@ simple_ratio<-function(sightings=sightings, group_variable=group_variable, dates
   jg[,group_variable]<-paste0("g", jg[,group_variable])
   
   if(is.matrix(mask)){
-    jg$filter<-apply(jg, 1, function(w) {ego_mask[as.character(w[1]),as.character(w[2])]})
+    jg$filter<-apply(jg, 1, function(w) {mask[as.character(w[1]),as.character(w[2])]})
     jg$X1<-ifelse(is.na(jg$filter),0,1) }
   
   groups_seen<-dat2mat(jg[,c(IDs, group_variable, "X1")])
