@@ -25,7 +25,7 @@ This function converts a dataframe of entry and depart dates to an availability 
 }
 \examples{
 fast_random_points()
-simple_ratio
+simple_ratio()
 }
 \keyword{availabilty}
 \keyword{matrix}
