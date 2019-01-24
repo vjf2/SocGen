@@ -7,6 +7,7 @@
 #' @param ycoords y coordinates
 #' @param time time step variable
 #' @param group_size average group size in results
+#' @param group_vector vector of group sizes per time step
 #' @param method grouping method, either kmeans or hierarchical clustering
 #' @keywords group ids, cluster ids
 #' @export
@@ -17,18 +18,21 @@ group_assign <- function(data = data,
                          id = "id",
                          xcoord = "x",
                          ycoord = "y",
-                         time = "day",
+                         time = NULL,
                          group_size = NULL,
+                         group_vector = NULL,
                          method = c("hclust", "kmeans")) {
   lapply(data, function(w) {
     
-    each_days_assoc <- lapply(w, function(x1) {
+    each_days_assoc <- lapply(seq_along(w), function(day_idx) {
+      
+      x1<- w[[day_idx]]
       
       if(!is.null(group_size)){
         
         num_clust <- ceiling(nrow(x1) / group_size)}
       
-      else{num_clust <- x1$groupseen[1]}
+      else{num_clust <- group_vector[day_idx]}
       
       if (num_clust > 1 & method=="hclust") {
         xc <- hclust(dist(x1[, c(xcoord, ycoord)]))
@@ -43,13 +47,15 @@ group_assign <- function(data = data,
         groups <- 1
       }
       
-      daygroup <- cbind(x1, groups)
+      # daygroup <- cbind(as.character(x1[,id]), paste0(time[day_idx],"_",groups))
+      daygroup <- data.frame(id=as.character(x1[,id]), 
+                             group=paste0(time[day_idx],"_",groups))
       rownames(daygroup) <- NULL
       return(daygroup)
     })
     
     eda <- do.call("rbind", each_days_assoc)
-    eda$observation_id <- paste0(eda[, time], "_", eda$groups)
+    # eda$observation_id <- paste0(names(group_vector), "_", eda$groups)
     rownames(eda) <- NULL
     return(eda)
   })
