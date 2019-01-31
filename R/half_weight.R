@@ -9,13 +9,14 @@
 #' @param symmetric logical, should a symmetric matrix be returned (default TRUE)
 #' @param mask an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not 
 #' @param assocInd the association index "HWI"
+#' @param M the M-weight for the index, set to 0.5 for half-weight index
 #' @keywords half weight association index
 #' @export
 #' @examples
 #' dat2mat()
 
 
-half_weight<-function(sightings=sightings, group_variable=group_variable, dates=dates, IDs=IDs, diag=FALSE, symmetric=TRUE, mask=NULL, assocInd="HWI"){
+half_weight<-function(sightings=sightings, group_variable=group_variable, dates=dates, IDs=IDs, diag=FALSE, symmetric=TRUE, mask=NULL, assocInd="HWI", M=0.5){
   
   #calcualate days where both individuals were seen
   
@@ -48,7 +49,7 @@ half_weight<-function(sightings=sightings, group_variable=group_variable, dates=
   
     if(assocInd=="HWI" & is.null(mask)){
       
-      retVal<-gs/(0.5 * nmat)
+      retVal<-gs/(M * nmat)
       
     }else if(is.matrix(mask)){
       mask<-mask[rownames(days_seen), colnames(days_seen)]
@@ -69,7 +70,7 @@ half_weight<-function(sightings=sightings, group_variable=group_variable, dates=
       rmmat<-dat2mat(rmmat, forceSymmetric = TRUE)
       if(assocInd=="HWI" & is.matrix(mask)){
         
-        retVal<-gs/(0.5 * (nmat-rmmat))
+        retVal<-gs/(M * (nmat-rmmat))
       }
     
   } #end everything after just X

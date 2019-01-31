@@ -6,7 +6,7 @@
 \usage{
 half_weight(sightings = sightings, group_variable = group_variable,
   dates = dates, IDs = IDs, diag = FALSE, symmetric = TRUE,
-  mask = NULL, assocInd = "HWI")
+  mask = NULL, assocInd = "HWI", M = 0.5)
 }
 \arguments{
 \item{sightings}{a dataframe in linear format, i.e., one row per individual per observation}
@@ -24,6 +24,8 @@ half_weight(sightings = sightings, group_variable = group_variable,
 \item{mask}{an availability matrix where rows are individuals and columns are sighting dates, cells should be 1 for available or NA if not}
 
 \item{assocInd}{the association index "HWI"}
+
+\item{M}{the M-weight for the index, set to 0.5 for half-weight index}
 }
 \description{
 This function calculates the half weight index for data in linear format
