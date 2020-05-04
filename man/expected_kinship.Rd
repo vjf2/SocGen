@@ -4,8 +4,13 @@
 \alias{expected_kinship}
 \title{Expected Kinship}
 \usage{
-expected_kinship(id = "id", mother_id = "mother_id",
-  father_id = "father_id", sex = "sex", data)
+expected_kinship(
+  id = "id",
+  mother_id = "mother_id",
+  father_id = "father_id",
+  sex = "sex",
+  data
+)
 }
 \arguments{
 \item{id}{character string specifying column of individuals ids}

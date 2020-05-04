@@ -4,8 +4,16 @@
 \alias{merge_pairs}
 \title{A Function to Merge Pairs}
 \usage{
-merge_pairs(x, y, xID1, xID2, yID1 = xID1, yID2 = xID2, all.x = TRUE,
-  all.y = FALSE)
+merge_pairs(
+  x,
+  y,
+  xID1,
+  xID2,
+  yID1 = xID1,
+  yID2 = xID2,
+  all.x = TRUE,
+  all.y = FALSE
+)
 }
 \arguments{
 \item{x}{a matrix or dataframe}

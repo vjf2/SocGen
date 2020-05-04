@@ -4,8 +4,14 @@
 \alias{schedulize}
 \title{Schedulize}
 \usage{
-schedulize(data, id = "dolphin_id", start = "entry", end = "depart",
-  dates = dates, format = c("sim", "mask"))
+schedulize(
+  data,
+  id = "dolphin_id",
+  start = "entry",
+  end = "depart",
+  dates = dates,
+  format = c("sim", "mask")
+)
 }
 \arguments{
 \item{data}{a dataframe}

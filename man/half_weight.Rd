@@ -4,9 +4,17 @@
 \alias{half_weight}
 \title{Half Weight Index}
 \usage{
-half_weight(sightings = sightings, group_variable = group_variable,
-  dates = dates, IDs = IDs, diag = FALSE, symmetric = TRUE,
-  mask = NULL, assocInd = "HWI", M = 0.5)
+half_weight(
+  sightings = sightings,
+  group_variable = group_variable,
+  dates = dates,
+  IDs = IDs,
+  diag = FALSE,
+  symmetric = TRUE,
+  mask = NULL,
+  assocInd = "HWI",
+  M = 0.5
+)
 }
 \arguments{
 \item{sightings}{a dataframe in linear format, i.e., one row per individual per observation}

@@ -4,9 +4,16 @@
 \alias{simple_ratio}
 \title{Simple Ratio Index}
 \usage{
-simple_ratio(sightings = sightings, group_variable = group_variable,
-  dates = dates, IDs = IDs, diag = FALSE, symmetric = TRUE,
-  mask = NULL, assocInd = "SRI")
+simple_ratio(
+  sightings = sightings,
+  group_variable = group_variable,
+  dates = dates,
+  IDs = IDs,
+  diag = FALSE,
+  symmetric = TRUE,
+  mask = NULL,
+  assocInd = "SRI"
+)
 }
 \arguments{
 \item{sightings}{a dataframe in linear format, i.e., one row per individual per observation}
