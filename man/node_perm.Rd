@@ -4,7 +4,7 @@
 \alias{node_perm}
 \title{Node permutation test}
 \usage{
-node_perm(mod, nperm = 1000, offset = NA, plot = TRUE)
+node_perm(mod, nperm = 1000, offset = NA, plot = TRUE, export = FALSE)
 }
 \arguments{
 \item{mod}{generalized linear model}

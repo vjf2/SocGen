@@ -16,7 +16,8 @@
 node_perm <- function(mod,
                       nperm = 1000,
                       offset = NA,
-                      plot = TRUE) {
+                      plot = TRUE,
+                      export = FALSE) {
   #make matrix
   ncoef <- length(coef(mod)) - 1
 
@@ -67,6 +68,8 @@ node_perm <- function(mod,
   results$pvalue<-ifelse(results$pvalue>0.5, 1-results$pvalue, results$pvalue)
   results$pvalue<-results$pvalue*2
   results<-round(results, 3)
+
+  if(export){results<-list(results, nmat)}
 
   return(results)
 }
